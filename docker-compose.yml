@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: masjid-network-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: masjid_network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - masjid-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: masjid-network-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/masjid_network?schema=public
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production
+      - JWT_EXPIRATION=1d
+      - PORT=3000
+      - CORS_ORIGIN=http://localhost:5173,http://localhost:3001
+    depends_on:
+      - postgres
+    networks:
+      - masjid-network
+    volumes:
+      - ./:/app
+      - /app/node_modules
+
+networks:
+  masjid-network:
+    driver: bridge
+
+volumes:
+  postgres-data: 
