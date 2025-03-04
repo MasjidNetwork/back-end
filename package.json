@@ -24,7 +24,8 @@
     "generate:postman": "ts-node src/swagger-to-postman.ts",
     "cleanup:win": "cleanup.bat",
     "cleanup:unix": "bash cleanup.sh",
-    "cleanup": "node -e \"require('child_process').spawn(process.platform === 'win32' ? 'cleanup.bat' : 'bash', [process.platform === 'win32' ? '' : 'cleanup.sh'], { stdio: 'inherit', shell: true });\""
+    "cleanup": "node -e \"require('child_process').spawn(process.platform === 'win32' ? 'cleanup.bat' : 'bash', [process.platform === 'win32' ? '' : 'cleanup.sh'], { stdio: 'inherit', shell: true });\"",
+    "seed": "ts-node -r tsconfig-paths/register prisma/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

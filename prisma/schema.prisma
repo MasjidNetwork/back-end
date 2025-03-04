@@ -30,7 +30,7 @@ model User {
   
   // Relations
   donations         Donation[]
-  masjidAdmin       MasjidAdmin?
+  masjidAdmin       MasjidAdmin[]
   notifications     Notification[]
 }
 
@@ -75,10 +75,13 @@ model MasjidAdmin {
   updatedAt        DateTime  @updatedAt
   
   // Relations
-  userId           String    @unique
+  userId           String
   user             User      @relation(fields: [userId], references: [id])
   masjidId         String
   masjid           Masjid    @relation(fields: [masjidId], references: [id])
+  
+  // Add a composite unique constraint if needed
+  @@unique([userId, masjidId])  // This ensures a user can't have multiple admin records for the same masjid
 }
 
 // Campaign management

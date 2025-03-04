@@ -38,7 +38,19 @@ This NestJS application provides the backend services for the Masjid Network pla
    npx prisma migrate dev
    ```
 
-4. Start the development server:
+4. Seed the database with sample data (optional):
+   ```bash
+   npm run seed
+   # or
+   yarn seed
+   ```
+   The seed script will create:
+   - Sample users with different roles (USER, ADMIN, MASJID_ADMIN, SUPER_ADMIN)
+   - Sample masjids
+   - Sample fundraising campaigns
+   - Sample donations
+
+5. Start the development server:
    ```bash
    npm run start:dev
    # or
@@ -110,6 +122,9 @@ This is particularly useful before committing changes, when you want to ensure a
 ```
 backend/
 ├── prisma/             # Prisma schema and migrations
+│   ├── schema.prisma   # Database schema
+│   ├── migrations/     # Database migrations
+│   └── seed.ts         # Database seed script
 ├── src/
 │   ├── auth/           # Authentication module
 │   ├── users/          # Users module
@@ -134,6 +149,7 @@ backend/
 - `yarn start:prod`: Start production server
 - `yarn docs`: Generate Swagger documentation
 - `yarn postman`: Generate Postman collection and environment
+- `yarn seed`: Seed the database with sample data
 - `yarn cleanup`: Clean up all generated files (cross-platform)
 - `yarn cleanup:win`: Clean up all generated files (Windows)
 - `yarn cleanup:unix`: Clean up all generated files (Unix/Linux/macOS)
