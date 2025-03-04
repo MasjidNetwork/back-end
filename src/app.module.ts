@@ -5,6 +5,10 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from './config/config.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { MasjidsModule } from './masjids/masjids.module';
+import { CampaignsModule } from './campaigns/campaigns.module';
+import { PaymentsModule } from './payments/payments.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { LoggerModule } from './logger/logger.module';
 import { HttpLoggerMiddleware } from './logger/http-logger.middleware';
@@ -15,6 +19,10 @@ import { HttpLoggerMiddleware } from './logger/http-logger.middleware';
     PrismaModule,
     LoggerModule,
     AuthModule,
+    UsersModule,
+    MasjidsModule,
+    CampaignsModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [

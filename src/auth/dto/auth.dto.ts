@@ -38,4 +38,4 @@ export class AuthResponseDto {
     lastName: string | null;
     role: string;
   };
-} 
+}

@@ -30,13 +30,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const message =
       exception instanceof HttpException
         ? exception.getResponse()
-        : { 
+        : {
             message: exception.message || 'Internal server error',
-            statusCode: status
+            statusCode: status,
           };
 
     // Stack trace for non-production environments
-    const stack = process.env.NODE_ENV !== 'production' ? exception.stack : undefined;
+    const stack =
+      process.env.NODE_ENV !== 'production' ? exception.stack : undefined;
 
     // Create response body
     const responseBody = {
@@ -51,16 +52,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
       this.loggerService.error(
         `[${request.method}] ${request.url} - ${status} - ${JSON.stringify(responseBody)}`,
         stack,
-        'HttpException'
+        'HttpException',
       );
     } else {
       this.loggerService.warn(
         `[${request.method}] ${request.url} - ${status} - ${JSON.stringify(responseBody)}`,
-        'HttpException'
+        'HttpException',
       );
     }
 
     // Send response
     response.status(status).json(responseBody);
   }
-} 
+}

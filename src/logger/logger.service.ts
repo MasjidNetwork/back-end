@@ -7,6 +7,7 @@ import * as path from 'path';
 @Injectable()
 export class LoggerService implements NestLoggerService {
   private logger: winston.Logger;
+  private contextName: string;
 
   constructor(private configService: ConfigService) {
     const isProduction = configService.get('NODE_ENV') === 'production';
@@ -50,11 +51,15 @@ export class LoggerService implements NestLoggerService {
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        winston.format.printf(({ timestamp, level, message, context, ...meta }) => {
-          const contextStr = context ? `[${context}] ` : '';
-          const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : '';
-          return `${timestamp} ${level}: ${contextStr}${message}${metaStr}`;
-        }),
+        winston.format.printf(
+          ({ timestamp, level, message, context, ...meta }) => {
+            const contextStr = context ? `[${context}] ` : '';
+            const metaStr = Object.keys(meta).length
+              ? `\n${JSON.stringify(meta, null, 2)}`
+              : '';
+            return `${timestamp} ${level}: ${contextStr}${message}${metaStr}`;
+          },
+        ),
       ),
     });
 
@@ -62,11 +67,7 @@ export class LoggerService implements NestLoggerService {
     this.logger = winston.createLogger({
       levels: winston.config.npm.levels,
       defaultMeta: { service: 'masjid-network-api' },
-      transports: [
-        consoleTransport,
-        fileTransport,
-        errorFileTransport,
-      ],
+      transports: [consoleTransport, fileTransport, errorFileTransport],
       exitOnError: false,
     });
 
@@ -76,23 +77,27 @@ export class LoggerService implements NestLoggerService {
     });
   }
 
+  setContext(context: string): void {
+    this.contextName = context;
+  }
+
   log(message: string, context?: string): void {
-    this.logger.info(message, { context });
+    this.logger.info(message, { context: context || this.contextName });
   }
 
   error(message: string, trace?: string, context?: string): void {
-    this.logger.error(message, { trace, context });
+    this.logger.error(message, { trace, context: context || this.contextName });
   }
 
   warn(message: string, context?: string): void {
-    this.logger.warn(message, { context });
+    this.logger.warn(message, { context: context || this.contextName });
   }
 
   debug(message: string, context?: string): void {
-    this.logger.debug(message, { context });
+    this.logger.debug(message, { context: context || this.contextName });
   }
 
   verbose(message: string, context?: string): void {
-    this.logger.verbose(message, { context });
+    this.logger.verbose(message, { context: context || this.contextName });
   }
-} 
+}

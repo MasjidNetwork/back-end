@@ -3,4 +3,4 @@ export enum Role {
   ADMIN = 'ADMIN',
   MASJID_ADMIN = 'MASJID_ADMIN',
   SUPER_ADMIN = 'SUPER_ADMIN',
-} 
+}

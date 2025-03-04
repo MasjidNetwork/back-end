@@ -14,9 +14,11 @@ import * as Joi from 'joi';
         DATABASE_URL: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().default('1d'),
-        CORS_ORIGIN: Joi.string().default('http://localhost:5173,http://localhost:3001'),
+        CORS_ORIGIN: Joi.string().default(
+          'http://localhost:5173,http://localhost:3001',
+        ),
       }),
     }),
   ],
 })
-export class ConfigModule {} 
+export class ConfigModule {}

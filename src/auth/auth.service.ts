@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import { LoginDto, RegisterDto, AuthResponseDto } from './dto/auth.dto';
@@ -97,4 +101,4 @@ export class AuthService {
   ): Promise<boolean> {
     return bcrypt.compare(plainPassword, hashedPassword);
   }
-} 
+}

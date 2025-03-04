@@ -84,34 +84,1303 @@
           "auth"
         ]
       }
+    },
+    "/users": {
+      "get": {
+        "operationId": "UsersController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all users (Admin only)",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "operationId": "UsersController_getProfile",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Return the current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get current user profile",
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "UsersController_updateProfile",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update current user profile",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UsersController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return the user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a user by id (Admin or own profile)",
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "operationId": "UsersController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a user (Admin only)",
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UsersController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User has been deleted"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a user (Admin only)",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/masjids": {
+      "get": {
+        "operationId": "MasjidsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all masjids",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MasjidResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all masjids",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "post": {
+        "operationId": "MasjidsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMasjidDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The masjid has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new masjid",
+        "tags": [
+          "masjids"
+        ]
+      }
+    },
+    "/masjids/{id}": {
+      "get": {
+        "operationId": "MasjidsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The masjid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Masjid not found"
+          }
+        },
+        "summary": "Get a masjid by ID",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "patch": {
+        "operationId": "MasjidsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMasjidDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The masjid has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden resource"
+          },
+          "404": {
+            "description": "Masjid not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a masjid",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "delete": {
+        "operationId": "MasjidsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The masjid has been deleted"
+          },
+          "403": {
+            "description": "Forbidden resource"
+          },
+          "404": {
+            "description": "Masjid not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a masjid",
+        "tags": [
+          "masjids"
+        ]
+      }
+    },
+    "/masjids/{masjidId}/admins": {
+      "get": {
+        "operationId": "MasjidsController_findAllAdmins",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of masjid admins",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MasjidAdminResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Masjid not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all admins for a masjid",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "post": {
+        "operationId": "MasjidsController_addAdmin",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMasjidAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The admin has been added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidAdminResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Masjid or user not found"
+          },
+          "409": {
+            "description": "User is already an admin"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Add an admin to a masjid",
+        "tags": [
+          "masjids"
+        ]
+      }
+    },
+    "/masjids/{masjidId}/admins/{adminId}": {
+      "get": {
+        "operationId": "MasjidsController_findOneAdmin",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminId",
+            "required": true,
+            "in": "path",
+            "description": "Admin ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The masjid admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidAdminResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a specific admin for a masjid",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "patch": {
+        "operationId": "MasjidsController_updateAdmin",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminId",
+            "required": true,
+            "in": "path",
+            "description": "Admin ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMasjidAdminDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The admin's role has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MasjidAdminResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update an admin's role",
+        "tags": [
+          "masjids"
+        ]
+      },
+      "delete": {
+        "operationId": "MasjidsController_removeAdmin",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "adminId",
+            "required": true,
+            "in": "path",
+            "description": "Admin ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The admin has been removed"
+          },
+          "403": {
+            "description": "Cannot remove the last admin"
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Remove an admin from a masjid",
+        "tags": [
+          "masjids"
+        ]
+      }
+    },
+    "/campaigns": {
+      "get": {
+        "operationId": "CampaignsController_findAll",
+        "parameters": [
+          {
+            "name": "activeOnly",
+            "required": false,
+            "in": "query",
+            "description": "Filter to only active campaigns",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all campaigns",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CampaignResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all campaigns",
+        "tags": [
+          "campaigns"
+        ]
+      },
+      "post": {
+        "operationId": "CampaignsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCampaignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The campaign has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a new campaign",
+        "tags": [
+          "campaigns"
+        ]
+      }
+    },
+    "/campaigns/masjid/{masjidId}": {
+      "get": {
+        "operationId": "CampaignsController_findByMasjid",
+        "parameters": [
+          {
+            "name": "masjidId",
+            "required": true,
+            "in": "path",
+            "description": "Masjid ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of campaigns for the masjid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CampaignResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get campaigns by masjid",
+        "tags": [
+          "campaigns"
+        ]
+      }
+    },
+    "/campaigns/{id}": {
+      "get": {
+        "operationId": "CampaignsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Campaign ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The campaign",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found"
+          }
+        },
+        "summary": "Get a campaign by ID",
+        "tags": [
+          "campaigns"
+        ]
+      },
+      "patch": {
+        "operationId": "CampaignsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Campaign ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCampaignDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The campaign has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden resource"
+          },
+          "404": {
+            "description": "Campaign not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a campaign",
+        "tags": [
+          "campaigns"
+        ]
+      },
+      "delete": {
+        "operationId": "CampaignsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Campaign ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The campaign has been deleted"
+          },
+          "403": {
+            "description": "Forbidden resource"
+          },
+          "404": {
+            "description": "Campaign not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a campaign",
+        "tags": [
+          "campaigns"
+        ]
+      }
+    },
+    "/campaigns/{campaignId}/donations": {
+      "get": {
+        "operationId": "CampaignsController_findDonations",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "required": true,
+            "in": "path",
+            "description": "Campaign ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of donations for the campaign",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DonationResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all donations for a campaign",
+        "tags": [
+          "campaigns"
+        ]
+      },
+      "post": {
+        "operationId": "CampaignsController_createDonation",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "required": true,
+            "in": "path",
+            "description": "Campaign ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDonationDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The donation has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DonationResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a donation for a campaign",
+        "tags": [
+          "campaigns"
+        ]
+      }
+    },
+    "/payments/details": {
+      "get": {
+        "operationId": "PaymentsController_findAllDetails",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of all payment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentDetailResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get all payment details",
+        "tags": [
+          "payments"
+        ]
+      },
+      "post": {
+        "operationId": "PaymentsController_createDetail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentDetailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The payment detail has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Donation not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Create a payment detail",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/payments/details/{id}": {
+      "get": {
+        "operationId": "PaymentsController_findOneDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Payment Detail ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The payment detail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment detail not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get a payment detail by ID",
+        "tags": [
+          "payments"
+        ]
+      },
+      "patch": {
+        "operationId": "PaymentsController_updateDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Payment Detail ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentDetailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The payment detail has been updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Update a payment detail",
+        "tags": [
+          "payments"
+        ]
+      },
+      "delete": {
+        "operationId": "PaymentsController_removeDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "Payment Detail ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The payment detail has been deleted"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Delete a payment detail",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/payments/details/donation/{donationId}": {
+      "get": {
+        "operationId": "PaymentsController_findByDonation",
+        "parameters": [
+          {
+            "name": "donationId",
+            "required": true,
+            "in": "path",
+            "description": "Donation ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The payment detail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDetailResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment detail not found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "Get payment details by donation ID",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/payments/create-intent": {
+      "post": {
+        "operationId": "PaymentsController_createIntent",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentIntentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The payment intent has been created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentIntentResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "Create a payment intent",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/payments/confirm-intent/{paymentIntentId}/{donationId}": {
+      "post": {
+        "operationId": "PaymentsController_confirmIntent",
+        "parameters": [
+          {
+            "name": "paymentIntentId",
+            "required": true,
+            "in": "path",
+            "description": "Payment Intent ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "donationId",
+            "required": true,
+            "in": "path",
+            "description": "Donation ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The payment intent has been confirmed"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "Confirm a payment intent",
+        "tags": [
+          "payments"
+        ]
+      }
+    },
+    "/payments/webhook": {
+      "post": {
+        "operationId": "PaymentsController_handleWebhook",
+        "parameters": [
+          {
+            "name": "stripe-signature",
+            "required": true,
+            "in": "header",
+            "description": "Stripe webhook signature",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Raw webhook body from Stripe",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook processed successfully"
+          }
+        },
+        "summary": "Handle payment webhook",
+        "tags": [
+          "payments"
+        ]
+      }
     }
   },
   "info": {
     "title": "Masjid Network API",
-    "description": "API documentation for the Masjid Network platform",
+    "description": "\n# Masjid Network API\n\n## Overview\nThe Masjid Network API provides a comprehensive backend for managing mosques (masjids), fundraising campaigns, donations, and user accounts. This platform connects mosques with their communities and facilitates fundraising for various projects and initiatives.\n\n## Features\n- User authentication and management\n- Masjid/mosque profiles and administration\n- Fundraising campaigns\n- Donation processing\n- Payment handling\n\n## Authentication\nMost endpoints require authentication using JWT Bearer tokens.\n\nTo obtain a token, use the /auth/login endpoint with valid credentials.\nInclude the token in the Authorization header: `Bearer your_token_here`\n\n## Getting Started\n1. Register a user account via /auth/register\n2. Login to obtain a JWT token via /auth/login\n3. Use the token to access protected endpoints\n    ",
     "version": "1.0",
     "contact": {}
   },
   "tags": [
     {
       "name": "auth",
-      "description": "Authentication endpoints"
+      "description": "Authentication and authorization endpoints"
     },
     {
       "name": "users",
-      "description": "User management endpoints"
+      "description": "User management operations"
     },
     {
       "name": "masjids",
-      "description": "Masjid management endpoints"
+      "description": "Mosque/masjid management operations"
     },
     {
       "name": "campaigns",
-      "description": "Campaign management endpoints"
+      "description": "Fundraising campaign management operations"
+    },
+    {
+      "name": "donations",
+      "description": "Donation processing operations"
     },
     {
       "name": "payments",
-      "description": "Payment processing endpoints"
+      "description": "Payment processing operations"
     }
   ],
   "servers": [],
@@ -120,7 +1389,10 @@
       "bearer": {
         "scheme": "bearer",
         "bearerFormat": "JWT",
-        "type": "http"
+        "type": "http",
+        "name": "JWT",
+        "description": "Enter JWT token",
+        "in": "header"
       }
     },
     "schemas": {
@@ -182,6 +1454,824 @@
           "email",
           "password"
         ]
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "firstName": {
+            "type": "object",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "object",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "object",
+            "example": "+1234567890"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "ADMIN",
+              "MASJID_ADMIN",
+              "SUPER_ADMIN"
+            ],
+            "example": "USER"
+          },
+          "profileImage": {
+            "type": "object",
+            "example": "https://example.com/avatar.jpg"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          },
+          "lastLogin": {
+            "type": "object",
+            "example": "2023-01-01T00:00:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "firstName",
+          "lastName",
+          "role",
+          "createdAt",
+          "updatedAt",
+          "isActive"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "profileImage": {
+            "type": "string",
+            "example": "https://example.com/avatar.jpg"
+          }
+        }
+      },
+      "AdminUpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "profileImage": {
+            "type": "string",
+            "example": "https://example.com/avatar.jpg"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "ADMIN",
+              "MASJID_ADMIN",
+              "SUPER_ADMIN"
+            ],
+            "example": "USER"
+          },
+          "isActive": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "MasjidResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "name": {
+            "type": "string",
+            "example": "Al-Aqsa Masjid"
+          },
+          "description": {
+            "type": "object",
+            "example": "A beautiful masjid serving the local community"
+          },
+          "address": {
+            "type": "string",
+            "example": "123 Main St"
+          },
+          "city": {
+            "type": "string",
+            "example": "New York"
+          },
+          "state": {
+            "type": "string",
+            "example": "NY"
+          },
+          "country": {
+            "type": "string",
+            "example": "USA"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "10001"
+          },
+          "email": {
+            "type": "object",
+            "example": "info@alaqsamasjid.org"
+          },
+          "phone": {
+            "type": "object",
+            "example": "+1234567890"
+          },
+          "website": {
+            "type": "object",
+            "example": "https://alaqsamasjid.org"
+          },
+          "logoUrl": {
+            "type": "object",
+            "example": "https://example.com/logo.jpg"
+          },
+          "coverImageUrl": {
+            "type": "object",
+            "example": "https://example.com/cover.jpg"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          },
+          "isVerified": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "address",
+          "city",
+          "state",
+          "country",
+          "zipCode",
+          "createdAt",
+          "updatedAt",
+          "isVerified"
+        ]
+      },
+      "CreateMasjidDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Al-Aqsa Masjid"
+          },
+          "description": {
+            "type": "string",
+            "example": "A beautiful masjid serving the local community"
+          },
+          "address": {
+            "type": "string",
+            "example": "123 Main St"
+          },
+          "city": {
+            "type": "string",
+            "example": "New York"
+          },
+          "state": {
+            "type": "string",
+            "example": "NY"
+          },
+          "country": {
+            "type": "string",
+            "example": "USA"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "10001"
+          },
+          "email": {
+            "type": "string",
+            "example": "info@alaqsamasjid.org"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "website": {
+            "type": "string",
+            "example": "https://alaqsamasjid.org"
+          },
+          "logoUrl": {
+            "type": "string",
+            "example": "https://example.com/logo.jpg"
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "example": "https://example.com/cover.jpg"
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "city",
+          "state",
+          "country",
+          "zipCode"
+        ]
+      },
+      "UpdateMasjidDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Al-Aqsa Masjid"
+          },
+          "description": {
+            "type": "string",
+            "example": "A beautiful masjid serving the local community"
+          },
+          "address": {
+            "type": "string",
+            "example": "123 Main St"
+          },
+          "city": {
+            "type": "string",
+            "example": "New York"
+          },
+          "state": {
+            "type": "string",
+            "example": "NY"
+          },
+          "country": {
+            "type": "string",
+            "example": "USA"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "10001"
+          },
+          "email": {
+            "type": "string",
+            "example": "info@alaqsamasjid.org"
+          },
+          "phone": {
+            "type": "string",
+            "example": "+1234567890"
+          },
+          "website": {
+            "type": "string",
+            "example": "https://alaqsamasjid.org"
+          },
+          "logoUrl": {
+            "type": "string",
+            "example": "https://example.com/logo.jpg"
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "example": "https://example.com/cover.jpg"
+          },
+          "isVerified": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "MasjidAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "role": {
+            "type": "string",
+            "example": "ADMIN"
+          },
+          "userId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "masjidId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "example": "2023-01-01T00:00:00.000Z"
+          }
+        },
+        "required": [
+          "id",
+          "role",
+          "userId",
+          "masjidId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateMasjidAdminDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "role": {
+            "type": "string",
+            "example": "ADMIN"
+          }
+        },
+        "required": [
+          "userId"
+        ]
+      },
+      "UpdateMasjidAdminDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "example": "ADMIN"
+          }
+        }
+      },
+      "CampaignResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the campaign"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the campaign"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the campaign"
+          },
+          "goal": {
+            "type": "number",
+            "description": "Funding goal amount for the campaign"
+          },
+          "raised": {
+            "type": "number",
+            "description": "Current amount raised for the campaign"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Start date of the campaign"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "End date of the campaign (optional)"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the campaign is active"
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "description": "Cover image URL for the campaign"
+          },
+          "masjidId": {
+            "type": "string",
+            "description": "ID of the masjid running the campaign"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the campaign was created"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the campaign was last updated"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "goal",
+          "raised",
+          "startDate",
+          "endDate",
+          "isActive",
+          "coverImageUrl",
+          "masjidId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateCampaignDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the campaign"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the campaign"
+          },
+          "goal": {
+            "type": "number",
+            "description": "Funding goal amount for the campaign"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Start date of the campaign"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "End date of the campaign (optional)"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the campaign is active"
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "description": "Cover image URL for the campaign"
+          },
+          "masjidId": {
+            "type": "string",
+            "description": "ID of the masjid running the campaign"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "goal",
+          "startDate",
+          "endDate",
+          "isActive",
+          "coverImageUrl",
+          "masjidId"
+        ]
+      },
+      "UpdateCampaignDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the campaign"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the campaign"
+          },
+          "goal": {
+            "type": "number",
+            "description": "Funding goal amount for the campaign"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Start date of the campaign"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "End date of the campaign (optional)"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Whether the campaign is active"
+          },
+          "coverImageUrl": {
+            "type": "string",
+            "description": "Cover image URL for the campaign"
+          },
+          "masjidId": {
+            "type": "string",
+            "description": "ID of the masjid running the campaign"
+          }
+        }
+      },
+      "DonationResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the donation"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Amount donated"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "description": "Payment method used"
+          },
+          "transactionId": {
+            "type": "string",
+            "description": "Transaction ID from payment provider"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the donation",
+            "enum": [
+              "PENDING",
+              "COMPLETED",
+              "FAILED",
+              "REFUNDED"
+            ]
+          },
+          "isAnonymous": {
+            "type": "boolean",
+            "description": "Whether the donation is anonymous"
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional message from donor"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who made the donation"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign for this donation"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the donation was created"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the donation was last updated"
+          }
+        },
+        "required": [
+          "id",
+          "amount",
+          "paymentMethod",
+          "transactionId",
+          "status",
+          "isAnonymous",
+          "message",
+          "userId",
+          "campaignId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateDonationDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount to donate"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "description": "Payment method to use"
+          },
+          "isAnonymous": {
+            "type": "boolean",
+            "description": "Whether the donation should be anonymous"
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional message to include with donation"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign to donate to"
+          }
+        },
+        "required": [
+          "amount",
+          "paymentMethod",
+          "isAnonymous",
+          "message",
+          "campaignId"
+        ]
+      },
+      "PaymentDetailResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the payment details"
+          },
+          "provider": {
+            "type": "string",
+            "description": "Payment provider (e.g. STRIPE, PAYPAL)"
+          },
+          "paymentMethodId": {
+            "type": "string",
+            "description": "Payment method ID from provider"
+          },
+          "receiptUrl": {
+            "type": "string",
+            "description": "URL to receipt/invoice"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional provider-specific data"
+          },
+          "donationId": {
+            "type": "string",
+            "description": "ID of the related donation"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the payment details were created"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When the payment details were last updated"
+          }
+        },
+        "required": [
+          "id",
+          "provider",
+          "paymentMethodId",
+          "receiptUrl",
+          "metadata",
+          "donationId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreatePaymentDetailDto": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Payment provider (e.g. STRIPE, PAYPAL)"
+          },
+          "paymentMethodId": {
+            "type": "string",
+            "description": "Payment method ID from provider"
+          },
+          "receiptUrl": {
+            "type": "string",
+            "description": "URL to receipt/invoice"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional provider-specific data"
+          },
+          "donationId": {
+            "type": "string",
+            "description": "ID of the related donation"
+          }
+        },
+        "required": [
+          "provider",
+          "paymentMethodId",
+          "receiptUrl",
+          "metadata",
+          "donationId"
+        ]
+      },
+      "UpdatePaymentDetailDto": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Payment provider (e.g. STRIPE, PAYPAL)"
+          },
+          "paymentMethodId": {
+            "type": "string",
+            "description": "Payment method ID from provider"
+          },
+          "receiptUrl": {
+            "type": "string",
+            "description": "URL to receipt/invoice"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Additional provider-specific data"
+          },
+          "donationId": {
+            "type": "string",
+            "description": "ID of the related donation"
+          }
+        }
+      },
+      "CreatePaymentIntentDto": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Amount to process (in cents)"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code (e.g. USD)"
+          },
+          "paymentMethod": {
+            "type": "string",
+            "description": "Payment method to use"
+          },
+          "campaignId": {
+            "type": "string",
+            "description": "ID of the campaign to donate to"
+          },
+          "isAnonymous": {
+            "type": "boolean",
+            "description": "Whether the donation should be anonymous"
+          },
+          "message": {
+            "type": "string",
+            "description": "Optional message to include with donation"
+          }
+        },
+        "required": [
+          "amount",
+          "currency",
+          "paymentMethod",
+          "campaignId",
+          "isAnonymous",
+          "message"
+        ]
+      },
+      "PaymentIntentResponseDto": {
+        "type": "object",
+        "properties": {
+          "clientSecret": {
+            "type": "string",
+            "description": "Client secret for Stripe payment intent"
+          },
+          "paymentIntentId": {
+            "type": "string",
+            "description": "Payment intent ID"
+          },
+          "donationId": {
+            "type": "string",
+            "description": "Temporary donation ID"
+          }
+        },
+        "required": [
+          "clientSecret",
+          "paymentIntentId",
+          "donationId"
+        ]
+      },
+      "Object": {
+        "type": "object",
+        "properties": {}
       }
     }
   }
