@@ -6,6 +6,33 @@ Backend API for the Masjid Network platform.
 
 This NestJS application provides the backend services for the Masjid Network platform, including user authentication, masjid management, fundraising campaigns, and payment processing.
 
+## Implementation Status
+
+The backend API is currently in active development with the following features:
+
+✅ **Completed Features**:
+- User authentication and management
+- Role-based access control
+- Masjid profiles and administration
+- Campaign management
+- API documentation with Swagger
+- Postman collection generation
+- Database seeding for testing
+- Logging and error handling
+- API standardization and versioning
+
+🔄 **In Progress**:
+- Payment processing integration
+- Webhook handling for payment providers
+- Email notification system
+- Analytics and reporting
+
+📝 **Planned Features**:
+- Advanced search capabilities
+- User subscription management
+- Recurring donations
+- Mobile app API extensions
+
 ## Getting Started
 
 ### Prerequisites
@@ -61,7 +88,36 @@ This NestJS application provides the backend services for the Masjid Network pla
 
 ### Swagger UI
 
-The API documentation is available at `/api/docs` when the server is running. This provides an interactive UI to explore and test the API endpoints.
+The API documentation is available at `/api/v1/docs` when the server is running. This provides an interactive UI to explore and test the API endpoints.
+
+### Comprehensive Documentation
+
+We provide several detailed documentation resources:
+
+1. **API Reference** - [API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
+   - Complete endpoint reference
+   - Authentication details
+   - User role explanations
+   - Request and response examples
+   - Common edge cases
+   - Testing information
+
+2. **API Interaction Guide** - [API_INTERACTION_GUIDE.md](./API_INTERACTION_GUIDE.md)
+   - Detailed user flows and interactions
+   - State changes and transitions
+   - Access control matrix
+   - Potential bottlenecks and solutions
+   - API standardization recommendations
+   - Versioning strategy
+
+3. **API Standardization** - [API_STANDARDIZATION.md](./API_STANDARDIZATION.md)
+   - API versioning implementation
+   - Standardized response formats
+   - Error code system
+   - Implementation details
+   - Migration guide
+
+These documents provide a comprehensive understanding of the API's functionality, usage patterns, and implementation details.
 
 ### Documentation Scripts
 
@@ -70,7 +126,7 @@ The project includes two scripts for generating documentation:
 1. **Generate API Documentation** (`yarn docs` or `npm run docs`):
    - Generates standard OpenAPI/Swagger documentation
    - Creates a `swagger.json` file in the `/docs` folder
-   - Used by Swagger UI when accessing `/api/docs`
+   - Used by Swagger UI when accessing `/api/v1/docs`
 
 2. **Generate Postman Collection** (`yarn postman` or `npm run postman`):
    - Creates an enhanced Postman collection with proper folder structure
@@ -172,3 +228,43 @@ Manages fundraising campaigns and donations.
 
 ### Payments Module
 Processes payments and integrates with payment gateways.
+
+## Implementation Plan
+
+To complete the remaining features, the following tasks are planned:
+
+### 1. Payment Integration (High Priority)
+- Complete Stripe integration for payment processing
+- Implement webhook handlers for payment events
+- Add payment verification and receipt generation
+- Create refund handling
+
+### 2. Email Notification System (Medium Priority)
+- Set up email service integration (SendGrid/Mailgun)
+- Create email templates for various events
+- Implement notification triggers
+- Add subscription management for users
+
+### 3. Analytics and Reporting (Medium Priority)
+- Create analytics data aggregation endpoints
+- Implement donation reporting features
+- Add dashboard data endpoints
+- Create export functionality for reports
+
+### 4. Advanced Features (Low Priority)
+- Implement recurring donations
+- Add user subscription management
+- Create advanced search capabilities
+- Develop mobile app-specific API endpoints
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and linting
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request

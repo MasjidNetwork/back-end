@@ -39,8 +39,8 @@ async function bootstrap() {
     }),
   );
 
-  // API prefix
-  app.setGlobalPrefix('api');
+  // API prefix with versioning
+  app.setGlobalPrefix('api/v1');
 
   // Swagger documentation
   const config = new DocumentBuilder()
@@ -62,9 +62,38 @@ async function bootstrap() {
       Most endpoints require authentication using a JWT Bearer token. 
       To authenticate, first use the /auth/login endpoint to obtain a token.
       
+      ## API Versioning
+      All endpoints are prefixed with /api/v1 to support future versioning.
+      
       ## Getting Started
       Explore the available endpoints using this Swagger UI, or import the Postman collection 
       from the /postman directory.
+      
+      ## Standard Response Format
+      All API responses follow a standard format:
+      
+      Success response:
+      \`\`\`json
+      {
+        "success": true,
+        "data": { ... },
+        "meta": {
+          "pagination": { ... }
+        }
+      }
+      \`\`\`
+      
+      Error response:
+      \`\`\`json
+      {
+        "success": false,
+        "error": {
+          "code": "ERROR_CODE",
+          "message": "Human-readable error message",
+          "details": { ... }
+        }
+      }
+      \`\`\`
     `,
     )
     .setVersion('1.0')
@@ -79,7 +108,7 @@ async function bootstrap() {
     .addTag('payments', 'Payment processing and financial transactions')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
+  SwaggerModule.setup('api/v1/docs', app, document);
 
   // Export Postman collection
   const outputDir = path.join(process.cwd(), 'postman');
@@ -108,7 +137,7 @@ async function bootstrap() {
     'Bootstrap',
   );
   logger.log(
-    `Swagger documentation available at: http://localhost:${port}/api/docs`,
+    `Swagger documentation available at: http://localhost:${port}/api/v1/docs`,
     'Bootstrap',
   );
 }

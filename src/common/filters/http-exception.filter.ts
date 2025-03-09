@@ -4,64 +4,74 @@ import {
   ArgumentsHost,
   HttpException,
   HttpStatus,
-  Logger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { LoggerService } from '../../logger/logger.service';
 
-@Catch()
+@Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  private readonly logger = new Logger(HttpExceptionFilter.name);
+  constructor(private readonly logger: LoggerService) {}
 
-  constructor(private readonly loggerService: LoggerService) {}
-
-  catch(exception: any, host: ArgumentsHost) {
+  catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
+    const status = exception.getStatus();
+    const errorResponse = exception.getResponse();
 
-    // Determine status code
-    const status =
-      exception instanceof HttpException
-        ? exception.getStatus()
-        : HttpStatus.INTERNAL_SERVER_ERROR;
+    // Extract error details
+    let errorMessage = 'Internal server error';
+    let errorCode = 'INTERNAL_ERROR';
+    let errorDetails = {};
 
-    // Get the error message
-    const message =
-      exception instanceof HttpException
-        ? exception.getResponse()
-        : {
-            message: exception.message || 'Internal server error',
-            statusCode: status,
-          };
+    if (typeof errorResponse === 'object') {
+      const errorObj = errorResponse as any;
+      errorMessage = errorObj.message || errorMessage;
+      
+      // Map HTTP status codes to error codes
+      switch (status) {
+        case HttpStatus.UNAUTHORIZED:
+          errorCode = 'AUTH_001';
+          break;
+        case HttpStatus.FORBIDDEN:
+          errorCode = 'AUTH_003';
+          break;
+        case HttpStatus.NOT_FOUND:
+          errorCode = 'RESOURCE_001';
+          break;
+        case HttpStatus.CONFLICT:
+          errorCode = 'RESOURCE_002';
+          break;
+        case HttpStatus.BAD_REQUEST:
+          errorCode = 'VALIDATION_001';
+          break;
+        default:
+          errorCode = `ERROR_${status}`;
+      }
 
-    // Stack trace for non-production environments
-    const stack =
-      process.env.NODE_ENV !== 'production' ? exception.stack : undefined;
-
-    // Create response body
-    const responseBody = {
-      statusCode: status,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-      ...(typeof message === 'object' ? message : { message }),
-    };
-
-    // Log the error
-    if (status >= 500) {
-      this.loggerService.error(
-        `[${request.method}] ${request.url} - ${status} - ${JSON.stringify(responseBody)}`,
-        stack,
-        'HttpException',
-      );
-    } else {
-      this.loggerService.warn(
-        `[${request.method}] ${request.url} - ${status} - ${JSON.stringify(responseBody)}`,
-        'HttpException',
-      );
+      // Include validation errors if available
+      if (errorObj.errors) {
+        errorDetails = { validationErrors: errorObj.errors };
+      }
     }
 
-    // Send response
-    response.status(status).json(responseBody);
+    // Log the error
+    this.logger.error(
+      `${request.method} ${request.url} - ${status}: ${errorMessage}`,
+      JSON.stringify(errorDetails),
+      'HttpException',
+    );
+
+    // Return standardized error response
+    response.status(status).json({
+      success: false,
+      error: {
+        code: errorCode,
+        message: errorMessage,
+        details: errorDetails,
+      },
+      timestamp: new Date().toISOString(),
+      path: request.url,
+    });
   }
 }

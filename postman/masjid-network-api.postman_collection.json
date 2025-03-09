@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/": {
+    "/api/v1": {
       "get": {
         "operationId": "AppController_getHello",
         "parameters": [],
@@ -15,7 +15,7 @@
         ]
       }
     },
-    "/auth/register": {
+    "/api/v1/auth/register": {
       "post": {
         "operationId": "AuthController_register",
         "parameters": [],
@@ -47,11 +47,10 @@
         "summary": "Register a new user",
         "tags": [
           "auth"
-        ],
-        "x-postman-folder": "auth"
+        ]
       }
     },
-    "/auth/login": {
+    "/api/v1/auth/login": {
       "post": {
         "operationId": "AuthController_login",
         "parameters": [],
@@ -83,11 +82,10 @@
         "summary": "Login a user",
         "tags": [
           "auth"
-        ],
-        "x-postman-folder": "auth"
+        ]
       }
     },
-    "/users": {
+    "/api/v1/users": {
       "get": {
         "operationId": "UsersController_findAll",
         "parameters": [],
@@ -114,11 +112,10 @@
         "summary": "Get all users (Admin only)",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       }
     },
-    "/users/profile": {
+    "/api/v1/users/profile": {
       "get": {
         "operationId": "UsersController_getProfile",
         "parameters": [],
@@ -142,8 +139,7 @@
         "summary": "Get current user profile",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       },
       "patch": {
         "operationId": "UsersController_updateProfile",
@@ -178,11 +174,10 @@
         "summary": "Update current user profile",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       }
     },
-    "/users/{id}": {
+    "/api/v1/users/{id}": {
       "get": {
         "operationId": "UsersController_findOne",
         "parameters": [
@@ -218,8 +213,7 @@
         "summary": "Get a user by id (Admin or own profile)",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       },
       "patch": {
         "operationId": "UsersController_update",
@@ -266,8 +260,7 @@
         "summary": "Update a user (Admin only)",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       },
       "delete": {
         "operationId": "UsersController_remove",
@@ -297,11 +290,10 @@
         "summary": "Delete a user (Admin only)",
         "tags": [
           "users"
-        ],
-        "x-postman-folder": "users"
+        ]
       }
     },
-    "/masjids": {
+    "/api/v1/masjids": {
       "get": {
         "operationId": "MasjidsController_findAll",
         "parameters": [],
@@ -323,8 +315,7 @@
         "summary": "Get all masjids",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "post": {
         "operationId": "MasjidsController_create",
@@ -359,11 +350,10 @@
         "summary": "Create a new masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       }
     },
-    "/masjids/{id}": {
+    "/api/v1/masjids/{id}": {
       "get": {
         "operationId": "MasjidsController_findOne",
         "parameters": [
@@ -395,8 +385,7 @@
         "summary": "Get a masjid by ID",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "patch": {
         "operationId": "MasjidsController_update",
@@ -447,8 +436,7 @@
         "summary": "Update a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "delete": {
         "operationId": "MasjidsController_remove",
@@ -482,11 +470,10 @@
         "summary": "Delete a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       }
     },
-    "/masjids/{masjidId}/admins": {
+    "/api/v1/masjids/{masjidId}/admins": {
       "get": {
         "operationId": "MasjidsController_findAllAdmins",
         "parameters": [
@@ -526,8 +513,7 @@
         "summary": "Get all admins for a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "post": {
         "operationId": "MasjidsController_addAdmin",
@@ -578,11 +564,10 @@
         "summary": "Add an admin to a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       }
     },
-    "/masjids/{masjidId}/admins/{adminId}": {
+    "/api/v1/masjids/{masjidId}/admins/{adminId}": {
       "get": {
         "operationId": "MasjidsController_findOneAdmin",
         "parameters": [
@@ -628,8 +613,7 @@
         "summary": "Get a specific admin for a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "patch": {
         "operationId": "MasjidsController_updateAdmin",
@@ -686,8 +670,7 @@
         "summary": "Update an admin's role",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       },
       "delete": {
         "operationId": "MasjidsController_removeAdmin",
@@ -730,11 +713,10 @@
         "summary": "Remove an admin from a masjid",
         "tags": [
           "masjids"
-        ],
-        "x-postman-folder": "masjids"
+        ]
       }
     },
-    "/campaigns": {
+    "/api/v1/campaigns": {
       "get": {
         "operationId": "CampaignsController_findAll",
         "parameters": [
@@ -766,8 +748,7 @@
         "summary": "Get all campaigns",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       },
       "post": {
         "operationId": "CampaignsController_create",
@@ -802,11 +783,10 @@
         "summary": "Create a new campaign",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       }
     },
-    "/campaigns/masjid/{masjidId}": {
+    "/api/v1/campaigns/masjid/{masjidId}": {
       "get": {
         "operationId": "CampaignsController_findByMasjid",
         "parameters": [
@@ -838,11 +818,10 @@
         "summary": "Get campaigns by masjid",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       }
     },
-    "/campaigns/{id}": {
+    "/api/v1/campaigns/{id}": {
       "get": {
         "operationId": "CampaignsController_findOne",
         "parameters": [
@@ -874,8 +853,7 @@
         "summary": "Get a campaign by ID",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       },
       "patch": {
         "operationId": "CampaignsController_update",
@@ -926,8 +904,7 @@
         "summary": "Update a campaign",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       },
       "delete": {
         "operationId": "CampaignsController_remove",
@@ -961,11 +938,10 @@
         "summary": "Delete a campaign",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       }
     },
-    "/campaigns/{campaignId}/donations": {
+    "/api/v1/campaigns/{campaignId}/donations": {
       "get": {
         "operationId": "CampaignsController_findDonations",
         "parameters": [
@@ -1002,8 +978,7 @@
         "summary": "Get all donations for a campaign",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       },
       "post": {
         "operationId": "CampaignsController_createDonation",
@@ -1043,11 +1018,10 @@
         "summary": "Create a donation for a campaign",
         "tags": [
           "campaigns"
-        ],
-        "x-postman-folder": "campaigns"
+        ]
       }
     },
-    "/payments/details": {
+    "/api/v1/payments/details": {
       "get": {
         "operationId": "PaymentsController_findAllDetails",
         "parameters": [],
@@ -1074,8 +1048,7 @@
         "summary": "Get all payment details",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       },
       "post": {
         "operationId": "PaymentsController_createDetail",
@@ -1113,11 +1086,10 @@
         "summary": "Create a payment detail",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     },
-    "/payments/details/{id}": {
+    "/api/v1/payments/details/{id}": {
       "get": {
         "operationId": "PaymentsController_findOneDetail",
         "parameters": [
@@ -1154,8 +1126,7 @@
         "summary": "Get a payment detail by ID",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       },
       "patch": {
         "operationId": "PaymentsController_updateDetail",
@@ -1200,8 +1171,7 @@
         "summary": "Update a payment detail",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       },
       "delete": {
         "operationId": "PaymentsController_removeDetail",
@@ -1229,11 +1199,10 @@
         "summary": "Delete a payment detail",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     },
-    "/payments/details/donation/{donationId}": {
+    "/api/v1/payments/details/donation/{donationId}": {
       "get": {
         "operationId": "PaymentsController_findByDonation",
         "parameters": [
@@ -1270,11 +1239,10 @@
         "summary": "Get payment details by donation ID",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     },
-    "/payments/create-intent": {
+    "/api/v1/payments/create-intent": {
       "post": {
         "operationId": "PaymentsController_createIntent",
         "parameters": [],
@@ -1306,11 +1274,10 @@
         "summary": "Create a payment intent",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     },
-    "/payments/confirm-intent/{paymentIntentId}/{donationId}": {
+    "/api/v1/payments/confirm-intent/{paymentIntentId}/{donationId}": {
       "post": {
         "operationId": "PaymentsController_confirmIntent",
         "parameters": [
@@ -1344,11 +1311,10 @@
         "summary": "Confirm a payment intent",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     },
-    "/payments/webhook": {
+    "/api/v1/payments/webhook": {
       "post": {
         "operationId": "PaymentsController_handleWebhook",
         "parameters": [
@@ -1381,21 +1347,15 @@
         "summary": "Handle payment webhook",
         "tags": [
           "payments"
-        ],
-        "x-postman-folder": "payments"
+        ]
       }
     }
   },
   "info": {
     "title": "Masjid Network API",
-    "description": "\n# Masjid Network API\n\n## Overview\nThe Masjid Network API provides a comprehensive backend for managing mosques (masjids), fundraising campaigns, donations, and user accounts. This platform connects mosques with their communities and facilitates fundraising for various projects and initiatives.\n\n## Features\n- User authentication and management\n- Masjid/mosque profiles and administration\n- Fundraising campaigns\n- Donation processing\n- Payment handling\n\n## Authentication\nMost endpoints require authentication using JWT Bearer tokens.\n\nTo obtain a token, use the /auth/login endpoint with valid credentials.\nInclude the token in the Authorization header: `Bearer your_token_here`\n\n## Getting Started\n1. Register a user account via /auth/register\n2. Login to obtain a JWT token via /auth/login\n3. Use the token to access protected endpoints\n    ",
+    "description": "\n      # API Documentation for the Masjid Network Platform\n      \n      This API serves as the backend for the Masjid Network platform, providing functionality for mosques/masjids, \n      fundraising campaigns, user management, and payment processing.\n      \n      ## Features:\n      - User authentication and management\n      - Masjid/mosque profiles and administration\n      - Fundraising campaigns and donation processing\n      - Payment handling and webhook integration\n      \n      ## Authentication\n      Most endpoints require authentication using a JWT Bearer token. \n      To authenticate, first use the /auth/login endpoint to obtain a token.\n      \n      ## API Versioning\n      All endpoints are prefixed with /api/v1 to support future versioning.\n      \n      ## Getting Started\n      Explore the available endpoints using this Swagger UI, or import the Postman collection \n      from the /postman directory.\n      \n      ## Standard Response Format\n      All API responses follow a standard format:\n      \n      Success response:\n      ```json\n      {\n        \"success\": true,\n        \"data\": { ... },\n        \"meta\": {\n          \"pagination\": { ... }\n        }\n      }\n      ```\n      \n      Error response:\n      ```json\n      {\n        \"success\": false,\n        \"error\": {\n          \"code\": \"ERROR_CODE\",\n          \"message\": \"Human-readable error message\",\n          \"details\": { ... }\n        }\n      }\n      ```\n    ",
     "version": "1.0",
-    "contact": {},
-    "x-postman-collection": {
-      "name": "Masjid Network API",
-      "description": "API for the Masjid Network platform",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    }
+    "contact": {}
   },
   "tags": [
     {
@@ -1404,36 +1364,28 @@
     },
     {
       "name": "users",
-      "description": "User management operations"
+      "description": "User profile and management endpoints"
     },
     {
       "name": "masjids",
-      "description": "Mosque/masjid management operations"
+      "description": "Mosque/masjid management and administration"
     },
     {
       "name": "campaigns",
-      "description": "Fundraising campaign management operations"
-    },
-    {
-      "name": "donations",
-      "description": "Donation processing operations"
+      "description": "Fundraising campaign management and donation operations"
     },
     {
       "name": "payments",
-      "description": "Payment processing operations"
+      "description": "Payment processing and financial transactions"
     }
   ],
   "servers": [],
   "components": {
     "securitySchemes": {
-      "JWT-auth": {
+      "bearer": {
         "scheme": "bearer",
         "bearerFormat": "JWT",
-        "type": "http",
-        "name": "JWT",
-        "description": "Enter JWT token",
-        "in": "header",
-        "x-postman-variable": "jwt_token"
+        "type": "http"
       }
     },
     "schemas": {
